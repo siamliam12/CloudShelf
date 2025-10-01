@@ -40,7 +40,7 @@ int main() {
         // For verification
         // cout << "[" << i << "] " << fileNames[i] << endl;
         // cout << extention << endl;
-        cout << filePaths[i] << endl;
+        // cout << filePaths[i] << endl;
     }
     // cout << "2D vector contents:" << endl;
     // for (const auto& row : fileData) {
