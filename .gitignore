@@ -1,0 +1,49 @@
+# Build and generated files
+cmake-build-*/
+build/
+out/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+compile_commands.json
+test/
+# IDE specific
+.idea/
+*.iml
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Object files
+*.o
+*.obj
+*.lo
+*.la
+
+# Libraries
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+
+# Backup / temporary files
+*~
+*.swp
+*.tmp
+
+# Coverage / profiling
+*.gcda
+*.gcno
+*.profraw
+*.profdata
