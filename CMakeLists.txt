@@ -8,4 +8,6 @@ add_executable(CloudShelf main.cpp
         handler/FileHandler.h
         handler/FileTypeHandler.cpp
         handler/FileTypeHandler.h
+        utils/MetaDataExtractor.cpp
+        utils/MetaDataExtractor.h
 )
