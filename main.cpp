@@ -5,13 +5,22 @@
 #include <unordered_map>
 #include <vector>
 #include "handler/FileHandler.h"
+#include "utils/MetaDataExtractor.h"
 using namespace std;
+
 int main() {
     string path;
+    string path2;
+    string targetPath;
+    string destinationPath;
     unordered_map<int,string> filePaths;
     unordered_map<int, string> fileNames;
-    cout << "Enter folder path: ";
+    cout << "Enter target folder path: ";
     getline(std::cin, path);
+    targetPath = path;
+    cout << "Enter destination folder path: ";
+    getline(std::cin, path2);
+    destinationPath = path2;
     auto dirIter = filesystem::recursive_directory_iterator(path);
     int fileCount = 0;
 
@@ -46,7 +55,13 @@ int main() {
     // for (const auto& row : fileData) {
     //     cout << "Filename: " << row[0] << " | Extension: " << row[1] << endl;
     // }
-    cout << "2D vector function calling:" << endl;
+    cout << "Target Folder permissions: " << endl;
+    GetFileData FileData(targetPath);
+    FileData.printFolderPermissions(targetPath);
+    cout << endl;
+    cout << "Destination Folder permissions: " << endl;
+    FileData.printFolderPermissions(destinationPath);
+    cout << endl;
     handleFile(fileData,fileCount);
     return 0;
 }
