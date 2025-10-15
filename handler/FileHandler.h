@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-void handleFile(std::vector<std::vector<std::string>> fileData,int &fileCount);
+void handleFile(std::vector<std::vector<std::string>> fileData,int &fileCount, std::string destinationPath);
 
 
 

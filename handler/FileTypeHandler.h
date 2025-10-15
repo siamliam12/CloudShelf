@@ -7,9 +7,9 @@
 #include "string"
 using namespace std;
 
-void handleTxt(string fileName,string ext,string path);
-void handlePdf(string fileName,string ext,string path);
-void handleVideo(string fileName,string ext,string path);
-void handleImage(string fileName,string ext,string path);
+void handleTxt(string fileName,string ext,string path,string destinationPath);
+void handlePdf(string fileName,string ext,string path,string destinationPath);
+void handleVideo(string fileName,string ext,string path,string destinationPath);
+void handleImage(string fileName,string ext,string path,string destinationPath);
 
 #endif //CLOUDSHELF_FILETYPEHANDLER_H
