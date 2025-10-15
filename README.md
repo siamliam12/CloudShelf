@@ -45,8 +45,8 @@ Invoices folder")
 Additional Features:
 - Batch Processing: Handle hundreds of files efficiently
 - Progress Tracking: Real-time progress display during organization
-4. Technical Challenges
-### Algorithm Complexity:
+### 4. Technical Challenges
+#### Algorithm Complexity:
 - File Content Parsing: Implementing text extraction from various file types (PDF, DOCX,
 images)
 - Pattern Recognition: Developing algorithms to identify document types and extract
@@ -108,9 +108,9 @@ project requirements
 adapted
 - Focus on understanding AI suggestions rather than blind implementation
 - Maintain academic integrity by being prepared to explain all code components
-6. Milestones and Submissions
-### Submission 1: Core Functionality (Due: October 26, 2025)
-#### Milestone 1 Deliverables:
+### 6. Milestones and Submissions
+#### Submission 1: Core Functionality (Due: October 26, 2025)
+##### Milestone 1 Deliverables:
 - Basic file analysis system that can identify file types and extract simple metadata
 - Core organization engine that can move files into predefined folder structures
 - Simple rule system for basic file categorization (by extension and basic keywords)

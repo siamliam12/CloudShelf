@@ -65,3 +65,80 @@ Owner: rw- Group: r-- Others: ---
 - The output is human-friendly, not just numbers![5][2]
 
 ##### In summary: This chunk builds a 3-block summary of file permissions using bitwise checks to display readable (`r`), writable (`w`), executable (`x`) rights for owner, group, and others, `-` if missing.
+
+### File moving feature
+This is an example of how to move a file from one folder to another. I used the
+copy() and remove() function which will copy the file and remove it from the
+source folder.
+```angular2html
+#include <iostream>
+#include <filesystem>
+#include <fstream> // Needed to ensure the files exist initially for demonstration
+
+// Note: Namespace alias for brevity
+namespace fs = std::filesystem;
+
+int main()
+{
+    // Define source and destination paths for the file move
+    fs::path source_path = "source_folder/file_to_move.txt";
+    fs::path destination_path = "destination_folder/file_to_move.txt";
+    
+    // --- Setup (Ensure folders and file exist for the example to work) ---
+    fs::create_directories("source_folder"); 
+    fs::create_directories("destination_folder");
+    
+    // Create a dummy file to be moved
+    std::ofstream("source_folder/file_to_move.txt") << "This is the content.\n";
+    
+    // --- Move Operation (Copy and Remove) ---
+    try {
+        // 1. Copy the file content to the new destination
+        // (std::filesystem::copy or std::filesystem::copy_file can be used)
+        std::cout << "Attempting to copy file...\n";
+        fs::copy(source_path, destination_path); [2]
+        
+        // 2. If the copy succeeds, remove the original file
+        std::cout << "Copy successful. Removing original file...\n";
+        fs::remove(source_path); [2]
+        
+        std::cout << "File moved successfully from " << source_path << " to " << destination_path << ".\n";
+    }
+    catch (const fs::filesystem_error& e) {
+        // Catch and report errors, such as if the file doesn't exist 
+        // or if copying/removing failed due to permissions.
+        std::cout << e.what() << '\n'; [2, 3]
+    }
+    
+    // Cleanup (optional, for demo environment)
+    fs::remove_all("source_folder");
+    fs::remove_all("destination_folder");
+
+    return 0;
+}
+```
+#### Q. why create_directories is used?
+The function $\texttt{std::filesystem::create\_directories}$ is used to create directories along a specified file path, ensuring the entire directory structure needed for a file exists.
+
+The general purpose and behavior of $\texttt{create\_directories}$ are:
+
+### Core Functionality and Purpose
+
+*   **Creating Missing Directories**: The primary role of $\texttt{create\_directories(p)}$ is to **execute $\texttt{create\_directory}$ for every element of path $\texttt{p}$ that does not already exist**. This means it recursively creates all intermediate directories needed to complete the path.
+*   **Preventing Write Errors**: Its main purpose, particularly when dealing with file output, is to **automatically create folders along a file path**. If a path to a file does not exist, writing operations like $\texttt{ofstream}$ might fail, resulting in the file "writ[ing] to nowhere". Calling $\texttt{create\_directories}$ beforehand ensures the required directory structure is present.
+*   **Handling Existing Paths**: If the path $\texttt{p}$ already exists, the function does nothing and reports no error. This behavior means that finding an existing directory at the target path is **not** treated as an error. It returns $\texttt{false}$ if a directory was not newly created for the directory $\texttt{p}$ resolves to.
+
+### Usage and Syntax
+
+*   $\texttt{create\_directories}$ is a part of the C++ Filesystem library ($\texttt{<filesystem>}$ header) and has been available since C++17.
+*   It can be used with one path argument: $\texttt{create\_directories(p)}$.
+*   It can also take an $\texttt{std::error\_code\&}$ parameter ($\texttt{ec}$) for non-throwing error reporting: $\texttt{create\_directories(p, ec)}$. In this case, if an OS API call fails, the error code parameter is set, and if no errors occur, $\texttt{ec.clear()}$ is executed.
+
+### Behavior Details and Error Handling
+
+*   The function returns $\texttt{true}$ if a directory was newly created for the path $\texttt{p}$ resolves to, and $\texttt{false}$ otherwise.
+*   Before the application of Defect Report LWG 2935 retroactively to C++17, there was an error if the target already existed but was not a directory; however, the correct behavior is that it is **not** an error if the target already exists, even if it is not a directory.
+*   If the function fails due to other problems, such as missing rights, an invalid path, or violation of file system resources, it typically throws an $\texttt{std::filesystem::filesystem\_error}$ exception (unless the non-throwing overload is used).
+
+As an example, to create a file in $\texttt{output/folder1/data/today/log.txt}$, you must first call $\texttt{create\_directories}$ on the parent directory path ($\texttt{output/folder1/data/today/}$) before attempting to write to the file itself.
+

@@ -10,4 +10,6 @@ add_executable(CloudShelf main.cpp
         handler/FileTypeHandler.h
         utils/MetaDataExtractor.cpp
         utils/MetaDataExtractor.h
+        utils/MoveAndOrg.cpp
+        utils/MoveAndOrg.h
 )

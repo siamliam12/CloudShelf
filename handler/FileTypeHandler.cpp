@@ -4,7 +4,7 @@
 
 #include "FileTypeHandler.h"
 #include "../utils/MetaDataExtractor.h"
-
+#include "../utils/MoveAndOrg.h"
 #include <chrono>
 #include <iostream>
 #include <string>
@@ -12,39 +12,52 @@
 using namespace std::chrono_literals;
 namespace fs = filesystem;
 
-void handleTxt(string fileName,string ext,string path) {
+void handleTxt(string fileName,string ext,string path,string destinationPath) {
     uintmax_t fileSize = fs::file_size(path);
     GetFileData FileData(path);
     string cftime = FileData.getTime();
     FileData.printFilePermissions();
+
+    Operations op(path,destinationPath);
+
+
     cout << fileName << " write time is " << cftime;
     cout << fileName << "'s size(bytes) is " << fileSize << endl;
+
+    op.copyAndRemoveFile(fileName);
+
     cout << endl;
 };
-void handlePdf(string fileName,string ext,string path) {
+void handlePdf(string fileName,string ext,string path,string destinationPath) {
     uintmax_t fileSize = fs::file_size(path);
     GetFileData FileData(path);
     string cftime = FileData.getTime();
     FileData.printFilePermissions();
+    Operations op(path,destinationPath);
     cout << fileName << " write time is " << cftime;
     cout << fileName << "'s size(bytes) is " << fileSize << endl;
+    op.copyAndRemoveFile(fileName);
     cout << endl;
 };
-void handleVideo(string fileName,string ext,string path) {
+void handleVideo(string fileName,string ext,string path,string destinationPath) {
     uintmax_t fileSize = fs::file_size(path);
     GetFileData FileData(path);
     string cftime = FileData.getTime();
     FileData.printFilePermissions();
+    Operations op(path,destinationPath);
     cout << fileName << " write time is " << cftime;
     cout << fileName << "'s size(bytes) is " << fileSize << endl;
+    op.copyAndRemoveFile(fileName);
     cout << endl;
 };
-void handleImage(string fileName,string ext,string path) {
+void handleImage(string fileName,string ext,string path,string destinationPath) {
     uintmax_t fileSize = fs::file_size(path);
     GetFileData FileData(path);
     string cftime = FileData.getTime();
     FileData.printFilePermissions();
+    Operations op(path,destinationPath);
     cout << fileName << " write time is " << cftime;
     cout << fileName << "'s size(bytes) is " << fileSize << endl;
+    op.copyAndRemoveFile(fileName);
     cout << endl;
 };

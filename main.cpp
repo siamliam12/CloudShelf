@@ -62,6 +62,6 @@ int main() {
     cout << "Destination Folder permissions: " << endl;
     FileData.printFolderPermissions(destinationPath);
     cout << endl;
-    handleFile(fileData,fileCount);
+    handleFile(fileData,fileCount,destinationPath);
     return 0;
 }
