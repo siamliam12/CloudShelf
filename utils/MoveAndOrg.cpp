@@ -13,13 +13,23 @@ Operations::Operations(string targetPath,string desPath) {
     moveFileTo = desPath;
 }
 
-void Operations::copyAndRemoveFile(string fileName) {
+void Operations::copyAndRemoveFile(string fileName,string baseFolderName) {
     fs::path  source= getFileFrom;
     fs::path  destination= moveFileTo;
-    fs::path getFullDesPath = destination / fileName;
+    fs::path addedBaseFolder = destination /baseFolderName ;
+    fs::path getFullDesPath = addedBaseFolder/ fileName;
+
     //making sure the destination exists
     fs::create_directories(destination);
     try {
+        if (fs::create_directories(addedBaseFolder))
+        {
+            cout << addedBaseFolder<<" created successfully (including any missing parents).\n";
+        }
+        else
+        {
+            cout << "Path already exists or no new directory was created.\n";
+        }
         //copy the file
         cout << "Attempting to copy file: " << fileName<< endl;
         fs::copy_file(source, getFullDesPath);

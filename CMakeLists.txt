@@ -12,4 +12,6 @@ add_executable(CloudShelf main.cpp
         utils/MetaDataExtractor.h
         utils/MoveAndOrg.cpp
         utils/MoveAndOrg.h
+        rule/BaseRule.cpp
+        rule/BaseRule.h
 )
