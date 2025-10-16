@@ -10,7 +10,7 @@ using namespace std;
 class Operations {
     public:
     Operations(string targetPath,string desPath);
-    void copyAndRemoveFile(string fileName);
+    void copyAndRemoveFile(string fileName,string baseFolderName);
 private:
     string getFileFrom;
     string moveFileTo;
