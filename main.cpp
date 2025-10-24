@@ -6,11 +6,24 @@
 #include <vector>
 #include "handler/FileHandler.h"
 #include "utils/MetaDataExtractor.h"
+#include "database/dbConnection.h"
+#include "rule/BaseSortFile.h"
 using namespace std;
 
 int main() {
+
+    //connecting to database
+    // sqlite3* DB = InitializeDatabase("data/cloud_shelf.db");
+    //
+    // // 2. CHECK FOR FAILURE: Check the return value immediately.
+    // if (DB == nullptr) {
+    //     std::cerr << "Application failed to initialize database." << std::endl;
+    //     return EXIT_FAILURE;
+    // }
+    // CloseDatabase(DB);
+    string databasePath = "data/cloud_shelf.db";
     string path;
-    string path2;
+
     string targetPath;
     string destinationPath;
     unordered_map<int,string> filePaths;
@@ -18,9 +31,8 @@ int main() {
     cout << "Enter target folder path: ";
     getline(std::cin, path);
     targetPath = path;
-    cout << "Enter destination folder path: ";
-    getline(std::cin, path2);
-    destinationPath = path2;
+
+    destinationPath = path;
     auto dirIter = filesystem::recursive_directory_iterator(path);
     int fileCount = 0;
 
@@ -62,6 +74,26 @@ int main() {
     cout << "Destination Folder permissions: " << endl;
     FileData.printFolderPermissions(destinationPath);
     cout << endl;
-    handleFile(fileData,fileCount,destinationPath);
+    handleFile(fileData,fileCount,destinationPath,databasePath);
+
+    //sorting
+    string choice_bool;
+    string choice;
+    cout << "Do you want to sort folder by time? (y/n): ";
+    getline(std::cin, choice_bool);
+    if (choice_bool == "y") {
+        cout << "Which folder you want to sort (1-4)?:"
+                "1. Pdf "
+                "2. Text"
+                "3. Images"
+                "4. Videos";
+        getline(std::cin, choice);
+        sqlite3* DB = InitializeDatabase(databasePath);
+        organizeStoredFiles(DB,choice,destinationPath);
+        CloseDatabase(DB);
+    }else {
+        return 0;
+    }
+
     return 0;
 }
