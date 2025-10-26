@@ -1,7 +1,7 @@
 # CS 1428 Semester Project Proposal
 Student Name: Md Siam Ahmed <br>
 Course: CS 1428 – Foundations of Computer Science I (Honor) <br>
-Date: September 21, 2025 <br>
+Date: October 26, 2025 <br>
 ## 1. Project Title
 ### CloudShelf: Intelligent Desktop File Management System
 ### 2. Project Description
