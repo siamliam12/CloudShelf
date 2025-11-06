@@ -8,10 +8,32 @@
 #include "utils/MetaDataExtractor.h"
 #include "database/dbConnection.h"
 #include "rule/BaseSortFile.h"
+
+//GUI LOGIC
+#include <QApplication>
+#include <QPushButton>
 using namespace std;
 
-int main() {
+int main(int argc, char *argv[]) {
+    // Wrap the entire Qt application start-up in a try-catch block
+    try {
+        QApplication app(argc, argv);
 
+        QPushButton button("Hello, My Window!");
+        button.show();
+
+        return app.exec();
+    }
+    // Catch standard exceptions (most C++ library errors derive from this)
+    catch (const std::exception& e) {
+        std::cerr << "FATAL EXCEPTION CAUGHT: " << e.what() << std::endl;
+        return -1;
+    }
+    // Catch all other exceptions (if the type is unknown)
+    catch (...) {
+        std::cerr << "FATAL EXCEPTION: An unknown error occurred." << std::endl;
+        return -1;
+    }
     //connecting to database
     // sqlite3* DB = InitializeDatabase("data/cloud_shelf.db");
     //
