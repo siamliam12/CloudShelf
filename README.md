@@ -1,7 +1,7 @@
 # CS 1428 Semester Project Proposal
 Student Name: Md Siam Ahmed <br>
 Course: CS 1428 – Foundations of Computer Science I (Honor) <br>
-Date: September 21, 2025 <br>
+Date: October 26, 2025 <br>
 ## 1. Project Title
 ### CloudShelf: Intelligent Desktop File Management System
 ### 2. Project Description
@@ -20,109 +20,42 @@ Example Problem: A file named "abcd.pdf" could be an invoice from September, a r
 work document. Traditional organizers would only see it as a PDF file, but our system will read
 its content, recognize it as an invoice from September, and automatically place it in an
 "Invoices/2025/September" folder structure.
-#### Goal
-Create an intelligent file organization system that saves users hours of manual work while
-maintaining accuracy and providing customizable organization rules.
-### 3. Key Features and Requirements
-#### Core Features:
-1. Intelligent Content Analysis
-* Parse file contents (not just names/extensions) to understand document types
-- Recognize common document categories: invoices, receipts, photos, music,
-videos, documents, etc.
-- Extract meaningful information like dates, document types, and categories from
-file content
-2. Automated Folder Structure Creation
-- Dynamically create organized folder hierarchies based on file analysis
-- Examples: "Documents/Invoices/2025/September",
-"Media/Photos/2024/Vacation", "Downloads/Software/Utilities"
-- Maintain consistent naming conventions and avoid duplicate folders
-3. Customizable Organization Rules
-- Allow users to set specific rules (e.g., "All .pdf files containing 'invoice' →
-Invoices folder")
-- User-defined folder structures and naming patterns
-- Rule priority system for handling conflicts
-- Save and load different organization profiles for different use cases
-Additional Features:
-- Batch Processing: Handle hundreds of files efficiently
-- Progress Tracking: Real-time progress display during organization
-### 4. Technical Challenges
-#### Algorithm Complexity:
-- File Content Parsing: Implementing text extraction from various file types (PDF, DOCX,
-images)
-- Pattern Recognition: Developing algorithms to identify document types and extract
-relevant metadata
-- Conflict Resolution: Handling cases where files could belong to multiple categories
-Data Structures:
-- Hash Maps (std::unordered_map): Store file extension mappings, keyword-to-category
-associations, and user-defined rules for O(1) lookup time
-- Binary Search Trees (std::map): Organize files by date/time for chronological folder
-creation, maintain sorted rule priorities
-- Vectors (std::vector): Store lists of files to process, batch operations for file
-movements, and maintain processing queues
-- Stacks: Track folder creation hierarchy and manage recursive directory traversal during
-file scanning
-- Priority Queues: Handle file processing order based on file size, type priority, or
-user-defined importance levels
-#### File System Operations:
-- Safe File Movement: Ensuring no data loss during file operations
-- Permission Handling: Managing file system permissions across different operating
-systems
-- Large File Processing: Efficiently handling large files and directories
-User Interface:
-- Real-time Updates: Displaying organization progress and results
-- Rule Configuration Interface: Creating an intuitive system for users to set custom rules
-### 5. AI Tools Usage Plan
-#### Specific AI Tool Integration:
-1. Claude AI (Code Architecture & Problem Solving)
-- Assist with overall system design and data structure selection
-- Help brainstorm efficient algorithms for file categorization and content analysis
-- Support complex problem-solving when handling edge cases in file operations
-2. CLion AI Assistant (Code Completion & Debugging)
-- Utilize CLion's integrated AI-powered code completion for efficient C++
-development
-- Leverage intelligent code suggestions and auto-completion during
-implementation
-- Use AI-assisted debugging features to identify and resolve runtime issues
-- Take advantage of automated refactoring suggestions and code quality
-improvements
-3. Gemini API (Content Understanding & Analysis)
-- Integrate directly into the application for intelligent file content analysis
-- Use Gemini's natural language processing to understand document types and
-contexts
-- Analyze file contents to extract meaningful metadata (dates, document types,
-categories)
-- Enable the system to recognize invoices, receipts, letters, and other document
-types beyond simple keyword matching
-Implementation Strategy:
-- Development Phase: Use Claude and CLion AI for coding assistance and
-debugging
-- Runtime Integration: Embed Gemini API calls for live content analysis of user
-files
-- Privacy Considerations: Ensure user consent before sending file contents to
-external APIs
-#### Responsible Usage and Documentation:
-- All AI-generated code will be thoroughly reviewed, tested, and modified to fit
-project requirements
-- API usage will be clearly documented with rate limiting and error handling
-- Code comments will indicate where AI assistance was used and how it was
-adapted
-- Focus on understanding AI suggestions rather than blind implementation
-- Maintain academic integrity by being prepared to explain all code components
-### 6. Milestones and Submissions
-#### Submission 1: Core Functionality (Due: October 26, 2025)
-##### Milestone 1 Deliverables:
-- Basic file analysis system that can identify file types and extract simple metadata
-- Core organization engine that can move files into predefined folder structures
-- Simple rule system for basic file categorization (by extension and basic keywords)
-- Command-line interface for testing core functionality
-- Ability to process a target folder and organize files into basic categories (Documents,
-Images, Audio, Video, Archives, Other)
-Submission 2: Advanced Features and GUI (Due: November 30, 2025)
-#### Milestone 2 Deliverables:
-- Advanced content analysis with context understanding (recognizing invoices, receipts,
-etc.)
-- User-friendly graphical interface with progress tracking
-- Customizable rule system where users can define their own organization logic
-- Backup and undo functionality
-- Complete documentation, including a user guide and technical documentation
-- Comprehensive testing with various file types and edge cases
+
+### How to use this
+1. When you run the program, it will first ask for the folder path you want to organize.
+
+2. After providing the path, the program will automatically organize the files into categorized folders.
+
+3. You may notice a lot of messages printed in the console — these are mainly for debugging purposes and will be removed in the next version.
+
+4. Once the initial organization is complete, the program will ask if you want to organize files based on their modification time.
+
+5. If you select “y”, it will then prompt you to choose the file type to organize:
+  - (1) PDF
+  - (2) TXT
+  - (3) Video
+  - (4) Images
+6. After selecting a file type, the program will sort those files into “Recent” and “Older” folders accordingly.
+
+### Report on Project Progress
+
+As stated in my initial project proposal, the goal of this project was to develop a program capable of automatically organizing files within a specified folder. During this phase, the core organization engine has been successfully implemented. This engine analyzes each file in the target directory, identifies its type and metadata, and determines the appropriate category for organization.
+
+A basic rule-based system has also been integrated to manage how files are sorted. Based on these rules, the program automatically moves files into folders corresponding to their file types, such as documents, images, videos, or text files. This allows for a cleaner and more structured directory without requiring manual effort.
+
+In addition to the planned features, I have introduced an extra functionality not mentioned in the initial proposal — the ability to sort files based on their modification time. With this feature, users can choose to organize specific file types (such as PDFs, text files, images, or videos) into subfolders labeled “Recent” and “Older,” providing an extra layer of organization and accessibility.
+
+At this stage, all operations are handled through a command-line interface (CLI). The console currently displays detailed debugging information to help track the organization process and ensure proper functionality. These outputs will be refined or removed in the next version once testing is complete.
+
+Overall, the project’s main structure and core logic are functioning as intended, and the additional time-based organization feature enhances its usability beyond the original plan.
+
+### Challenges Faced
+
+One of the main challenges I encountered was storing file data and reusing it later for the organization process. Since I followed a modular programming approach, I separated each major functionality into different functions to make the codebase more manageable. This required careful data passing between functions, which I handled using vectors and maps to store and transfer information efficiently.
+
+Another significant difficulty was implementing the file moving operation. I relied on the std::filesystem library’s copy and remove methods, which worked well but introduced challenges related to file permissions on Windows. Managing these permissions and ensuring smooth execution required extensive testing and debugging.
+
+Later, I faced an issue with utilizing metadata extracted during the initial organization process. To address this, I integrated an SQLite3 database into the project to persist and retrieve file information. Setting up the database was challenging, especially since I was using the core C API without any wrappers. I had to manually configure CMake, debug several build issues, and implement custom functions to initialize and close database connections. Additionally, I wrote raw SQL queries to design and create the database schema that defines how the file data is stored.
+
+The most complex challenge so far has been sorting files based on their modification time. Because the program uses the copy-and-remove method, the file timestamps change to the current time after the initial organization. To solve this, I rely on the timestamps stored in the first database record instead of the modified ones. This solution works, but it still requires further refinement, which I plan to complete in the second submission.
+
